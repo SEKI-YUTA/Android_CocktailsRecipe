@@ -63,6 +63,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recycler_detailInfo"/>
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textAlignment="textEnd"-->
+<!--            android:text="more info..."-->
+<!--            android:id="@+id/tv_moreInfo_link"/>-->
 
 <!--        <LinearLayout-->
 <!--            android:orientation="horizontal"-->
@@ -80,6 +86,30 @@
 <!--                android:layout_height="wrap_content"-->
 <!--                android:id="@+id/recycler_measure"/>-->
 <!--        </LinearLayout>-->
+
+        <TextView
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Instructions"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_instruction"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:id="@+id/tv_instructionVideo"/>
+
+
 
     </LinearLayout>
 

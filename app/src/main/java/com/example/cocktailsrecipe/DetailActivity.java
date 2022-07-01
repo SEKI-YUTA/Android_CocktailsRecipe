@@ -1,7 +1,10 @@
 package com.example.cocktailsrecipe;
 
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +25,7 @@ import java.util.Map;
 
 public class DetailActivity extends AppCompatActivity {
     private ImageView img_headerImg;
-    private TextView tv_cocktailName, tv_cocktailGlass;
+    private TextView tv_cocktailName, tv_cocktailGlass,tv_instruction, tv_instructionVideo;
 //    private RecyclerView recycler_ingredient, recycler_measure;
     private RecyclerView recycler_detailInfo;
 //    private List<String> ingredientList = new ArrayList<>();
@@ -39,6 +42,8 @@ public class DetailActivity extends AppCompatActivity {
         img_headerImg = findViewById(R.id.img_headerImg);
         tv_cocktailName = findViewById(R.id.tv_cocktailName);
         tv_cocktailGlass = findViewById(R.id.tv_cocktailGlass);
+        tv_instruction = findViewById(R.id.tv_instruction);
+        tv_instructionVideo = findViewById(R.id.tv_instructionVideo);
         recycler_detailInfo = findViewById(R.id.recycler_detailInfo);
 //        recycler_ingredient = findViewById(R.id.recycler_ingredient);
 //        recycler_measure = findViewById(R.id.recycler_measure);
@@ -46,9 +51,26 @@ public class DetailActivity extends AppCompatActivity {
         recycler_detailInfo.setLayoutManager(new GridLayoutManager(this, 1));
         recycler_detailInfo.stopScroll();
 
-        Picasso.get().load(drink.getStrDrinkThumb()).into(img_headerImg);
+//        tv_moreInfo_link.setText(Html.fromHtml(String.format("<a href='%s'>more info...</a>", drink.getStrImageSource())));
+//        tv_moreInfo_link.setMovementMethod(LinkMovementMethod.getInstance());
+//        tv_moreInfo_link.setAutoLinkMask(1);
         tv_cocktailName.setText(drink.getStrDrink());
         tv_cocktailGlass.setText(drink.getStrGlass());
+        tv_instruction.setText(drink.getStrInstructions());
+        if(drink.getStrVideo() != null) {
+            String link = String.format("<a href='%s'>more info...</a>", drink.getStrVideo());
+            Log.d("VideoLink", link);
+            tv_instructionVideo.setText(Html.fromHtml(link));
+            tv_instructionVideo.setMovementMethod(LinkMovementMethod.getInstance());
+        } else {
+            tv_instructionVideo.setVisibility(View.GONE);
+        }
+
+        if(drink.getStrDrinkThumb() != "" && drink.getStrDrinkThumb() != null) {
+            Picasso.get().load(drink.getStrDrinkThumb()).into(img_headerImg);
+        } else {
+            img_headerImg.setImageDrawable(this.getDrawable(R.drawable.cocktail_no_image));
+        }
 
         for(int i = 1; i <= 15; i++) {
             try {

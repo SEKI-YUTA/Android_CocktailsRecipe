@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:padding="8dp"
     android:layout_marginTop="8dp"
     android:id="@+id/card_cocktail"
+    android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="8dp"
         android:weightSum="4">
         <LinearLayout
             android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="start"
             >
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cocktail Name"
                 android:id="@+id/tv_cocktailName"
                 android:textSize="24sp"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:textIsSelectable="true"
                 />
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cocktail Glass"
                 android:id="@+id/tv_cocktailGlass"
                 android:textSize="16sp"
+                android:textIsSelectable="true"
                 />
 
         </LinearLayout>

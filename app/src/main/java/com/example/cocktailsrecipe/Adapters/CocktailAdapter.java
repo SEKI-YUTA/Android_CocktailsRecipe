@@ -44,11 +44,13 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("drink", drink);
-                context.getApplicationContext().startActivity(intent);
+                context.startActivity(intent);
             }
         });
-        if(drink.getStrDrinkThumb() != "") {
-            Picasso.get().load(drink.strDrinkThumb).into(holder.img_cocktailThumbnail);
+        if(drink.getStrDrinkThumb() != "" && drink.getStrDrinkThumb() != null) {
+            Picasso.get().load(drink.getStrDrinkThumb()).into(holder.img_cocktailThumbnail);
+        } else {
+            holder.img_cocktailThumbnail.setImageDrawable(context.getDrawable(R.drawable.cocktail_no_image));
         }
     }
 
