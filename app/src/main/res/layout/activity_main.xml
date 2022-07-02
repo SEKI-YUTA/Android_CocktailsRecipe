@@ -28,11 +28,11 @@
             android:id="@+id/edit_keyword"
             />
         <ImageButton
+            android:background="@drawable/rounded_bg"
+            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:id="@+id/imgBtn_search"
-            android:background="@drawable/rounded_bg"
             android:src="@drawable/ic_search"
             android:paddingVertical="8dp"
             />

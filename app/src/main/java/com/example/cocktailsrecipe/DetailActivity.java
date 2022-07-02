@@ -62,6 +62,7 @@ public class DetailActivity extends AppCompatActivity {
             Log.d("VideoLink", link);
             tv_instructionVideo.setText(Html.fromHtml(link));
             tv_instructionVideo.setMovementMethod(LinkMovementMethod.getInstance());
+            tv_instructionVideo.setVisibility(View.VISIBLE);
         } else {
             tv_instructionVideo.setVisibility(View.GONE);
         }

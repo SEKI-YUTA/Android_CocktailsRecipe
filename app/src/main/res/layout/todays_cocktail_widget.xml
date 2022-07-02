@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Widget.CocktailsRecepi.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_bg"
+    android:theme="@style/Theme.CocktailsRecepi.AppWidgetContainer">
+
+   <TextView
+       android:id="@+id/tv_todaysCocktail_title"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Today's Cocktail"
+       android:textAlignment="center"
+       android:textSize="16sp"
+       android:textColor="@color/black"
+       android:textStyle="bold|italic"
+       />
+
+    <TextView
+        android:layout_below="@+id/tv_todaysCocktail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gin Fizz"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:layout_marginTop="8dp"
+        />
+</RelativeLayout>

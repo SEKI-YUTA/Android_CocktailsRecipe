@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerCocktails.setAdapter(adapter);
 
         imgBtn_search.setImageDrawable(drawable);
-        imgBtn_search.setBackgroundColor(getResources().getColor(R.color.black));
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("Searching...\nwait a moment");

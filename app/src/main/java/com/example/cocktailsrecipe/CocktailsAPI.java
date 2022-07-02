@@ -12,4 +12,7 @@ import retrofit2.http.Query;
 public interface CocktailsAPI {
     @GET("v1/{apiKey}/search.php")
     Call<CocktailsResponse> searchCocktails( @Path("apiKey") String apiKey, @Query("s") String s);
+
+    @GET("v1/1/random.php")
+    Call<CocktailsResponse> getRandomCocktail();
 }
