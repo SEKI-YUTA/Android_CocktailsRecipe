@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cocktailsrecipe.Adapters.CocktailAdapter;
 import com.example.cocktailsrecipe.Models.CocktailsResponse;
 import com.example.cocktailsrecipe.Models.Drink;
+import com.example.cocktailsrecipe.Utils.GeneralUtil;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -28,6 +29,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -155,5 +157,15 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if(GeneralUtil.getInstance().isDoubleTapped(new Date().getTime())) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Quickly double tap to go back homeScreen", Toast.LENGTH_SHORT).show();
+        }
     }
 }
