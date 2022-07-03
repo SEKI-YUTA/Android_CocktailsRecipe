@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_instruction"
             android:textSize="14sp"
-            />
+            android:textIsSelectable="true"/>
 
         <TextView
             android:layout_width="match_parent"

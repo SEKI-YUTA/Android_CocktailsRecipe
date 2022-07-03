@@ -1,5 +1,6 @@
 package com.example.cocktailsrecipe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -45,8 +46,16 @@ public class DetailActivity extends AppCompatActivity {
         tv_instruction = findViewById(R.id.tv_instruction);
         tv_instructionVideo = findViewById(R.id.tv_instructionVideo);
         recycler_detailInfo = findViewById(R.id.recycler_detailInfo);
-//        recycler_ingredient = findViewById(R.id.recycler_ingredient);
-//        recycler_measure = findViewById(R.id.recycler_measure);
+
+        img_headerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivity.this, ImageDetailActivity.class);
+                intent.putExtra("imgUrl", drink.getStrDrinkThumb());
+                startActivity(intent);
+            }
+        });
+
         recycler_detailInfo.setHasFixedSize(true);
         recycler_detailInfo.setLayoutManager(new GridLayoutManager(this, 1));
         recycler_detailInfo.stopScroll();

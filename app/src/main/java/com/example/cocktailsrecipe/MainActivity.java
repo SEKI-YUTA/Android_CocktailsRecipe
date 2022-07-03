@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("MyLog", "OnCreate");
 
         CocktailAdapter adapter = new CocktailAdapter(MainActivity.this, drinkList);
 
@@ -85,11 +86,37 @@ public class MainActivity extends AppCompatActivity {
                 }).check();
     }
 
+    // パーミッションが許可されたときの処理
     private void appSetUP() {
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.thecocktaildb.com/api/json/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        // 最初に表示させるランダムなカクテルを取得
+        CocktailsAPI cocktailsAPI = retrofit.create(CocktailsAPI.class);
+        Call<CocktailsResponse> call = cocktailsAPI.getRandomCocktail();
+        call.enqueue(new Callback<CocktailsResponse>() {
+            @Override
+            public void onResponse(Call<CocktailsResponse> call, Response<CocktailsResponse> response) {
+                if(!response.isSuccessful()) {
+                    Toast.makeText(MainActivity.this, "invalid data", Toast.LENGTH_SHORT).show();
+                }
+                drinkList  = response.body().getDrinks();
+                for (Drink drink: drinkList) {
+                    Log.d("MyLog", drink.getStrDrink());
+                }
+                CocktailAdapter adapter = new CocktailAdapter(MainActivity.this, drinkList);
+                recyclerCocktails.setAdapter(adapter);
+                dialog.hide();
+            }
+
+            @Override
+            public void onFailure(Call<CocktailsResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Con not get data from api", Toast.LENGTH_SHORT).show();
+            }
+        });
+        // 最初に表示させるランダムなカクテルを取得　ここまで-------
 
         imgBtn_search.setOnClickListener(new View.OnClickListener() {
             @Override
