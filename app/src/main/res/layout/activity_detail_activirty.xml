@@ -7,7 +7,6 @@
     tools:context=".DetailActivity">
 
     <ScrollView
-        android:paddingBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -114,7 +113,9 @@
                 android:textSize="14sp"
                 android:id="@+id/tv_instructionVideo"/>
 
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"/>
 
         </LinearLayout>
     </ScrollView>
