@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="8dp"
     android:id="@+id/card_cocktail"
-    android:clickable="true"
     app:cardCornerRadius="10dp"
     android:elevation="16dp"
     android:layout_width="match_parent"

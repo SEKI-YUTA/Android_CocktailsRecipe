@@ -15,4 +15,7 @@ public interface CocktailsAPI {
 
     @GET("v1/1/random.php")
     Call<CocktailsResponse> getRandomCocktail();
+
+    @GET("v1/1/lookup.php")
+    Call<CocktailsResponse> getCocktailByID(@Query("i") String i);
 }

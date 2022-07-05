@@ -11,7 +11,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:weightSum="6"
+        android:weightSum="7"
         android:paddingBottom="8dp"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
@@ -34,6 +34,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/imgBtn_search"
             android:src="@drawable/ic_search"
+            android:paddingVertical="8dp"
+            android:layout_marginRight="4dp"
+            />
+        <ImageButton
+            android:background="@drawable/rounded_bg"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgBtn_list"
+            android:src="@drawable/ic_list"
             android:paddingVertical="8dp"
             />
 

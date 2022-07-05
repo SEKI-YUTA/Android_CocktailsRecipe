@@ -3,6 +3,7 @@ package com.example.cocktailsrecipe;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private EditText edit_keyword;
-    private ImageButton imgBtn_search;
+    private ImageButton imgBtn_search, imgBtn_list;
     private RecyclerView recyclerCocktails;
     private Retrofit retrofit;
     private List<Drink> drinkList = new ArrayList<>();
@@ -53,18 +54,24 @@ public class MainActivity extends AppCompatActivity {
 
         CocktailAdapter adapter = new CocktailAdapter(MainActivity.this, drinkList);
 
-        Drawable drawable = getDrawable(R.drawable.ic_search);
-        drawable.setTint(getResources().getColor(R.color.white));
-        drawable.setTintMode(PorterDuff.Mode.SRC_IN);
+        Drawable drawableSearch = getDrawable(R.drawable.ic_search);
+        drawableSearch.setTint(getResources().getColor(R.color.white));
+        drawableSearch.setTintMode(PorterDuff.Mode.SRC_IN);
+
+        Drawable drawableList = getDrawable(R.drawable.ic_list);
+        drawableList.setTint(getResources().getColor(R.color.white));
+        drawableList.setTintMode(PorterDuff.Mode.SRC_IN);
 
         edit_keyword = findViewById(R.id.edit_keyword);
         imgBtn_search = findViewById(R.id.imgBtn_search);
+        imgBtn_list = findViewById(R.id.imgBtn_list);
         recyclerCocktails = findViewById(R.id.recycler_cocktails);
         recyclerCocktails.setHasFixedSize(true);
         recyclerCocktails.setLayoutManager(new GridLayoutManager(this, 1));
         recyclerCocktails.setAdapter(adapter);
 
-        imgBtn_search.setImageDrawable(drawable);
+        imgBtn_search.setImageDrawable(drawableSearch);
+        imgBtn_list.setImageDrawable(drawableList);
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("Searching...\nwait a moment");
@@ -155,6 +162,14 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Con not get data from api", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        imgBtn_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, FavoriteListActivity.class);
+                startActivity(intent);
             }
         });
     }

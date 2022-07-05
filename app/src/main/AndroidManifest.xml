@@ -16,6 +16,9 @@
         android:theme="@style/Theme.CocktailsRecepi"
         tools:targetApi="31">
         <activity
+            android:name=".FavoriteListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ImageDetailActivity"
             android:exported="false" />
 

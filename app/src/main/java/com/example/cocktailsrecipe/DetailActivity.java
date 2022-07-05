@@ -8,13 +8,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cocktailsrecipe.Adapters.IngredientAdapter;
+import com.example.cocktailsrecipe.DBModels.FavoriteCocktail;
 import com.example.cocktailsrecipe.Models.Drink;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.lang.reflect.InvocationTargetException;
@@ -27,8 +30,10 @@ import java.util.Map;
 public class DetailActivity extends AppCompatActivity {
     private ImageView img_headerImg;
     private TextView tv_cocktailName, tv_cocktailGlass,tv_instruction, tv_instructionVideo;
+    private FloatingActionButton fab_addFavorite;
 //    private RecyclerView recycler_ingredient, recycler_measure;
     private RecyclerView recycler_detailInfo;
+    private DBHelper dbHelper;
 //    private List<String> ingredientList = new ArrayList<>();
 //    private List<String> measureList = new ArrayList<>();
 
@@ -45,7 +50,10 @@ public class DetailActivity extends AppCompatActivity {
         tv_cocktailGlass = findViewById(R.id.tv_cocktailGlass);
         tv_instruction = findViewById(R.id.tv_instruction);
         tv_instructionVideo = findViewById(R.id.tv_instructionVideo);
+        fab_addFavorite = findViewById(R.id.fab_addFavorite);
         recycler_detailInfo = findViewById(R.id.recycler_detailInfo);
+
+        dbHelper = new DBHelper(this);
 
         img_headerImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +61,15 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(DetailActivity.this, ImageDetailActivity.class);
                 intent.putExtra("imgUrl", drink.getStrDrinkThumb());
                 startActivity(intent);
+            }
+        });
+        
+        fab_addFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DetailActivity.this, "Add Favorite", Toast.LENGTH_SHORT).show();
+                FavoriteCocktail favoriteCocktail = new FavoriteCocktail(Integer.parseInt(drink.getIdDrink()), drink.getStrDrink(), drink.getStrGlass(), drink.getStrDrinkThumb());
+                dbHelper.addCocktail(favoriteCocktail);
             }
         });
 
