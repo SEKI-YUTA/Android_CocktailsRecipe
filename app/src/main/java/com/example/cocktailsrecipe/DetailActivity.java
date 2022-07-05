@@ -34,6 +34,7 @@ public class DetailActivity extends AppCompatActivity {
 //    private RecyclerView recycler_ingredient, recycler_measure;
     private RecyclerView recycler_detailInfo;
     private DBHelper dbHelper;
+    private boolean isFavorite;
 //    private List<String> ingredientList = new ArrayList<>();
 //    private List<String> measureList = new ArrayList<>();
 
@@ -55,6 +56,11 @@ public class DetailActivity extends AppCompatActivity {
 
         dbHelper = new DBHelper(this);
 
+        isFavorite = dbHelper.alreadyExists(Integer.parseInt(drink.getIdDrink()));
+        if(isFavorite) {
+            fab_addFavorite.setImageDrawable(getDrawable(R.drawable.ic_favorite_filled));
+        }
+
         img_headerImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,9 +73,19 @@ public class DetailActivity extends AppCompatActivity {
         fab_addFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(DetailActivity.this, "Add Favorite", Toast.LENGTH_SHORT).show();
-                FavoriteCocktail favoriteCocktail = new FavoriteCocktail(Integer.parseInt(drink.getIdDrink()), drink.getStrDrink(), drink.getStrGlass(), drink.getStrDrinkThumb());
-                dbHelper.addCocktail(favoriteCocktail);
+                if(isFavorite) {
+                    Toast.makeText(DetailActivity.this, "Remove Favorite", Toast.LENGTH_SHORT).show();
+                    FavoriteCocktail favoriteCocktail = new FavoriteCocktail(Integer.parseInt(drink.getIdDrink()), drink.getStrDrink(), drink.getStrGlass(), drink.getStrDrinkThumb());
+                    dbHelper.deleteFavorite(favoriteCocktail);
+                    isFavorite = !isFavorite;
+                    fab_addFavorite.setImageDrawable(getDrawable(R.drawable.ic_favorite));
+                } else {
+                    Toast.makeText(DetailActivity.this, "Add Favorite", Toast.LENGTH_SHORT).show();
+                    FavoriteCocktail favoriteCocktail = new FavoriteCocktail(Integer.parseInt(drink.getIdDrink()), drink.getStrDrink(), drink.getStrGlass(), drink.getStrDrinkThumb());
+                    dbHelper.addCocktail(favoriteCocktail);
+                    fab_addFavorite.setImageDrawable(getDrawable(R.drawable.ic_favorite_filled));
+                    isFavorite = !isFavorite;
+                }
             }
         });
 

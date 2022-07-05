@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.cocktailsrecipe.Adapters.FavoriteAdapter;
@@ -27,11 +30,10 @@ public class FavoriteListActivity extends AppCompatActivity {
         recycler_favorite = findViewById(R.id.recycler_favorite);
         dbHelper = new DBHelper(this);
 
-        favoriteCocktailList = dbHelper.getAllFavoriteCocktail();
-
         recycler_favorite.setHasFixedSize(true);
         recycler_favorite.setLayoutManager(new GridLayoutManager(this, 1));
 
+        favoriteCocktailList = dbHelper.getAllFavoriteCocktail();
         adapter = new FavoriteAdapter(this, favoriteCocktailList, listener);
 
         recycler_favorite.setAdapter(adapter);
@@ -41,11 +43,35 @@ public class FavoriteListActivity extends AppCompatActivity {
     final View.OnLongClickListener listener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View view) {
-            int i = recycler_favorite.indexOfChild(view);
-            dbHelper.deleteFavorite(favoriteCocktailList.get(i));
-            favoriteCocktailList.remove(i);
-            adapter.notifyDataSetChanged();
+            PopupMenu menu = new PopupMenu(FavoriteListActivity.this, view);
+            menu.inflate(R.menu.popup_menu);
+            menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.popup_delete:
+                            int i = recycler_favorite.indexOfChild(view);
+                            dbHelper.deleteFavorite(favoriteCocktailList.get(i));
+                            favoriteCocktailList.remove(i);
+                            adapter.notifyDataSetChanged();
+                            return true;
+                        default:
+                            return true;
+                    }
+                }
+            });
+            menu.show();
+
             return false;
         }
     };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MyLog", "Resume");
+        favoriteCocktailList = dbHelper.getAllFavoriteCocktail();
+        adapter = new FavoriteAdapter(this, favoriteCocktailList, listener);
+        recycler_favorite.setAdapter(adapter);
+    }
 }

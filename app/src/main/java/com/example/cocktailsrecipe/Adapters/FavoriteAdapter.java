@@ -63,6 +63,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<CocktailViewHolder> {
         holder.card_cocktail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // IDから詳細データを取得して詳細画面へ遷移
                 CocktailsAPI cocktailsAPI = retrofit.create(CocktailsAPI.class);
                 Call<CocktailsResponse> call = cocktailsAPI.getCocktailByID(String.valueOf(favoriteCocktail.getId()));
                 call.enqueue(new Callback<CocktailsResponse>() {

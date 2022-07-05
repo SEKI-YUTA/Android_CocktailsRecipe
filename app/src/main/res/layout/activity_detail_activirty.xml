@@ -7,6 +7,7 @@
     tools:context=".DetailActivity">
 
     <ScrollView
+        android:paddingBottom="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -37,6 +38,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_cocktailName"
+                    android:textIsSelectable="true"
                     android:text="Gin fizz"
                     android:textSize="24sp"
                     android:textStyle="bold"/>

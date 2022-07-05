@@ -35,7 +35,6 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CocktailViewHolder holder, int position) {
-        Log.d("MyLog", "bindViewHolder");
         Drink drink = drinkList.get(holder.getAdapterPosition());
         holder.tv_cocktailName.setText(drink.getStrDrink());
         holder.tv_cocktailGlass.setText(drink.getStrGlass());

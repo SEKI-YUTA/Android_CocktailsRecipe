@@ -90,4 +90,16 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
+    public boolean alreadyExists(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM " + FAVORITE_COCKTAIL_TABLE + " WHERE " + COCKTAIL_ID + " = " + id;
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToNext()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 }
