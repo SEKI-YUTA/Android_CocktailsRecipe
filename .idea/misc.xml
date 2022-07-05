@@ -18,6 +18,7 @@
         <entry key="..\:/Users/yuta/Desktop/apps/java/CocktailsRecepi/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.214" />
         <entry key="app/src/main/res/layout/activity_detail_activirty.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/layout/cocktail_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/ingredient_item.xml" value="0.1752786220871327" />
         <entry key="app/src/main/res/menu/popup_menu.xml" value="0.1" />
       </map>
     </option>

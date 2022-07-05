@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +36,8 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tv_cocktailName, tv_cocktailGlass,tv_instruction, tv_instructionVideo;
     private FloatingActionButton fab_addFavorite;
 //    private RecyclerView recycler_ingredient, recycler_measure;
-    private RecyclerView recycler_detailInfo;
+//    private RecyclerView recycler_detailInfo;
+    private LinearLayout ingredientArea;
     private DBHelper dbHelper;
     private boolean isFavorite;
 //    private List<String> ingredientList = new ArrayList<>();
@@ -52,7 +57,8 @@ public class DetailActivity extends AppCompatActivity {
         tv_instruction = findViewById(R.id.tv_instruction);
         tv_instructionVideo = findViewById(R.id.tv_instructionVideo);
         fab_addFavorite = findViewById(R.id.fab_addFavorite);
-        recycler_detailInfo = findViewById(R.id.recycler_detailInfo);
+        ingredientArea = findViewById(R.id.ingredientArea);
+//        recycler_detailInfo = findViewById(R.id.recycler_detailInfo);
 
         dbHelper = DBHelper.getInstance(this);
 
@@ -89,9 +95,9 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        recycler_detailInfo.setHasFixedSize(true);
-        recycler_detailInfo.setLayoutManager(new GridLayoutManager(this, 1));
-        recycler_detailInfo.stopScroll();
+//        recycler_detailInfo.setHasFixedSize(true);
+//        recycler_detailInfo.setLayoutManager(new GridLayoutManager(this, 1));
+//        recycler_detailInfo.stopScroll();
 
 //        tv_moreInfo_link.setText(Html.fromHtml(String.format("<a href='%s'>more info...</a>", drink.getStrImageSource())));
 //        tv_moreInfo_link.setMovementMethod(LinkMovementMethod.getInstance());
@@ -117,6 +123,25 @@ public class DetailActivity extends AppCompatActivity {
                     Log.d("DetailActivity", ingredient);
                     Map<String, String> item = new HashMap<>();
                     item.put(ingredient, measure);
+
+                    LinearLayout ingredientRow = new LinearLayout(this);
+                    ingredientRow.setGravity(Gravity.CENTER_VERTICAL);
+                    ingredientRow.setWeightSum(3);
+                    ingredientRow.setPadding(10, 20, 10, 20);
+                    TextView ingredientText = new TextView(this);
+                    TextView measureText = new TextView(this);
+                    ingredientText.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+                    measureText.setLayoutParams(new TableLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 2f));
+//                    ingredientText.setPadding(0, 20, 0, 20);
+//                    measureText.setPadding(0, 20, 0, 20);
+                    ingredientText.setText(ingredient);
+                    ingredientText.setTextSize(16);
+                    measureText.setText(measure);
+                    measureText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+                    ingredientRow.addView(ingredientText);
+                    ingredientRow.addView(measureText);
+                    ingredientArea.addView(ingredientRow);
+
                     ingredientsList.add(item);
                 }
             } catch (NoSuchMethodException e) {
@@ -128,8 +153,13 @@ public class DetailActivity extends AppCompatActivity {
             }
         }
 
-        IngredientAdapter adapter = new IngredientAdapter(this, ingredientsList);
-        recycler_detailInfo.setAdapter(adapter);
+//        ViewGroup.LayoutParams params=recycler_detailInfo.getLayoutParams();
+//        params.height=30 * ingredientsList.size() * 3 + 30;
+//        Log.d("MyLog", String.valueOf(30 * ingredientsList.size() * 3));
+//        recycler_detailInfo.setLayoutParams(params);
+
+//        IngredientAdapter adapter = new IngredientAdapter(this, ingredientsList);
+//        recycler_detailInfo.setAdapter(adapter);
     }
     // 動画のリンクがある場合はリンクを表示させる処理
     private void videoLinkSetUP(Drink drink) {
