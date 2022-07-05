@@ -28,7 +28,7 @@ public class FavoriteListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_favorite_list);
 
         recycler_favorite = findViewById(R.id.recycler_favorite);
-        dbHelper = new DBHelper(this);
+        dbHelper = DBHelper.getInstance(this);
 
         recycler_favorite.setHasFixedSize(true);
         recycler_favorite.setLayoutManager(new GridLayoutManager(this, 1));

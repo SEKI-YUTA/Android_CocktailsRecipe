@@ -15,13 +15,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
+    public static DBHelper dbHelper;
     public static final String FAVORITE_COCKTAIL_TABLE = "FOVORITE_COCKTAIL_TABLE";
     public static final String COCKTAIL_ID = "COCKTAIL_ID";
     public static final String COCKTAIL_NAME = "COCKTAIL_NAME";
     public static final String COCKTAIL_GLASS = "COCKTAIL_GLASS";
     public static final String COCKTAIL_IMAGE_URL = "COCKTAIL_IMAGE_URL";
 
-    public DBHelper(@Nullable Context context) {
+    public static DBHelper getInstance(Context context) {
+        if (dbHelper == null) {
+            dbHelper = new DBHelper(context);
+        }
+        return dbHelper;
+    }
+
+    private DBHelper(@Nullable Context context) {
         super(context.getApplicationContext(), "cocktailApp.db", null, 1);
     }
 

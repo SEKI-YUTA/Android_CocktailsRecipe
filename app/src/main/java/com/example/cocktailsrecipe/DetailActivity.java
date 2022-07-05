@@ -54,7 +54,7 @@ public class DetailActivity extends AppCompatActivity {
         fab_addFavorite = findViewById(R.id.fab_addFavorite);
         recycler_detailInfo = findViewById(R.id.recycler_detailInfo);
 
-        dbHelper = new DBHelper(this);
+        dbHelper = DBHelper.getInstance(this);
 
         isFavorite = dbHelper.alreadyExists(Integer.parseInt(drink.getIdDrink()));
         if(isFavorite) {
@@ -98,16 +98,7 @@ public class DetailActivity extends AppCompatActivity {
 //        tv_moreInfo_link.setAutoLinkMask(1);
         tv_cocktailName.setText(drink.getStrDrink());
         tv_cocktailGlass.setText(drink.getStrGlass());
-        tv_instruction.setText(drink.getStrInstructions());
-        if(drink.getStrVideo() != null) {
-            String link = String.format("<a href='%s'>more info...</a>", drink.getStrVideo());
-            Log.d("VideoLink", link);
-            tv_instructionVideo.setText(Html.fromHtml(link));
-            tv_instructionVideo.setMovementMethod(LinkMovementMethod.getInstance());
-            tv_instructionVideo.setVisibility(View.VISIBLE);
-        } else {
-            tv_instructionVideo.setVisibility(View.GONE);
-        }
+        videoLinkSetUP(drink);
 
         if(drink.getStrDrinkThumb() != "" && drink.getStrDrinkThumb() != null) {
             Picasso.get().load(drink.getStrDrinkThumb()).into(img_headerImg);
@@ -139,5 +130,18 @@ public class DetailActivity extends AppCompatActivity {
 
         IngredientAdapter adapter = new IngredientAdapter(this, ingredientsList);
         recycler_detailInfo.setAdapter(adapter);
+    }
+    // 動画のリンクがある場合はリンクを表示させる処理
+    private void videoLinkSetUP(Drink drink) {
+        tv_instruction.setText(drink.getStrInstructions());
+        if(drink.getStrVideo() != null) {
+            String link = String.format("<a href='%s'>more info...</a>", drink.getStrVideo());
+            Log.d("VideoLink", link);
+            tv_instructionVideo.setText(Html.fromHtml(link));
+            tv_instructionVideo.setMovementMethod(LinkMovementMethod.getInstance());
+            tv_instructionVideo.setVisibility(View.VISIBLE);
+        } else {
+            tv_instructionVideo.setVisibility(View.GONE);
+        }
     }
 }
