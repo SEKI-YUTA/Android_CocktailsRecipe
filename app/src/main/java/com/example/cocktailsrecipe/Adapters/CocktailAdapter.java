@@ -46,6 +46,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailViewHolder> {
                 context.startActivity(intent);
             }
         });
+        holder.tv_cocktailName.setSelected(true);
         if(drink.getStrDrinkThumb() != "" && drink.getStrDrinkThumb() != null) {
             Picasso.get().load(drink.getStrDrinkThumb()).into(holder.img_cocktailThumbnail);
         } else {
