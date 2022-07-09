@@ -41,6 +41,9 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.3'
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation "androidx.cardview:cardview:1.0.0"
+
+
+    implementation 'com.github.MikeOrtiz:TouchImageView:1.4.1'
     // end of added
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
